@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, jsonify
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
-
+from waitress import serve
 
 tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-medium")
 model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-medium")
@@ -42,3 +42,6 @@ def get_Chat_response(text):
 
 if __name__ == '__main__':
     app.run()
+
+
+    
