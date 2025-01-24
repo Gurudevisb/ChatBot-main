@@ -51,10 +51,14 @@ def get_Chat_response(text):
             bot_input_ids,
             max_length=512,  # Reduced max_length to save memory
             pad_token_id=tokenizer.eos_token_id,
-            attention_mask=attention_mask
+            attention_mask=attention_mask,
+            no_repeat_ngram_size=2,  # Avoid repeating n-grams
+            temperature=0.7,  # Reduce randomness (optional)
+            top_p=0.9,  # Use nucleus sampling
+            top_k=50,  # Limit the number of highest probability tokens to consider
         )
 
-    # Clear CUDA cache after each response
+    # Clear CUDA cache after each response to prevent memory leakage
     torch.cuda.empty_cache()
 
     # Return the last output tokens from the bot
